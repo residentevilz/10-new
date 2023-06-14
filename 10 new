@@ -1,0 +1,15 @@
+import requests
+
+def get_latest_posts(url, count=10):
+    api_url = f"{url}/wp-json/wp/v2/posts?per_page={count}"
+    response = requests.get(api_url)
+    posts = response.json()
+    return posts
+
+# Example usage
+wordpress_url = "https://your-wordpress-site.com"
+latest_posts = get_latest_posts(wordpress_url, 10)
+for post in latest_posts:
+    print(f"Title: {post['title']['rendered']}")
+    print(f"Content: {post['content']['rendered']}")
+    print("-----------")
